@@ -14,6 +14,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Spin For Food | What Should I Eat Tonight?</title>
   <meta name="description" content="Spin the wheel and instantly decide what food or takeaway to eat tonight."/>
+  <!-- Favicon (inline SVG wheel) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230a0a0a' stroke='%23f97316' stroke-width='4'/%3E%3Cpath d='M50 50 L50 4' stroke='%23ffb347' stroke-width='3'/%3E%3Cpath d='M50 50 L88 72' stroke='%23ef4444' stroke-width='3'/%3E%3Cpath d='M50 50 L12 72' stroke='%238b5cf6' stroke-width='3'/%3E%3Cpath d='M50 50 L12 28' stroke='%2306b6d4' stroke-width='3'/%3E%3Cpath d='M50 50 L88 28' stroke='%2322c55e' stroke-width='3'/%3E%3Cpath d='M50 50 L50 96' stroke='%23eab308' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='12' fill='%23f97316'/%3E%3Ctext x='50' y='55' font-size='10' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'%3E🍕%3C/text%3E%3C/svg%3E"/>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Open Graph / Social Preview -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://www.spinforfood.com/"/>
+  <meta property="og:title" content="Spin For Food — What Should I Eat Tonight?"/>
+  <meta property="og:description" content="Stop scrolling Deliveroo. Spin the wheel and let fate decide your dinner. Free, instant, and surprisingly accurate."/>
+  <meta property="og:image" content="https://www.spinforfood.com/og-image.png"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:site_name" content="Spin For Food"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:site" content="@spinforfood"/>
+  <meta name="twitter:title" content="Spin For Food — What Should I Eat Tonight?"/>
+  <meta name="twitter:description" content="Stop scrolling Deliveroo. Spin the wheel and let fate decide your dinner."/>
+  <meta name="twitter:image" content="https://www.spinforfood.com/og-image.png"/>
+
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -296,6 +315,114 @@
       .mobile-wheel-outer { width: 260px; height: 260px; }
       .mobile-hero h1 { font-size: 36px; }
     }
+
+    /* ══ SHARED WHEEL BANNER ══ */
+    .shared-banner {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 4px;
+      font-size: 0.82rem;
+      color: #a78bfa;
+      line-height: 1.4;
+    }
+    .shared-banner.show { display: flex; }
+    .shared-banner-icon { font-size: 1.2rem; flex-shrink: 0; }
+    .shared-banner strong { color: #c4b5fd; font-weight: 700; }
+    .shared-banner-dismiss {
+      background: none; border: none; color: #6d5fa3;
+      cursor: pointer; font-size: 1rem; margin-left: auto;
+      flex-shrink: 0; padding: 0 0 0 8px;
+      transition: color 0.15s;
+    }
+    .shared-banner-dismiss:hover { color: #a78bfa; }
+
+    /* ══ MOBILE SHARED BANNER ══ */
+    .mobile-shared-banner {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      background: rgba(124,58,237,0.12);
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: 12px;
+      padding: 10px 14px;
+      font-size: 0.78rem;
+      color: #a78bfa;
+      line-height: 1.4;
+    }
+    .mobile-shared-banner.show { display: flex; }
+    .mobile-shared-banner strong { color: #c4b5fd; }
+    .mobile-shared-banner-dismiss {
+      background: none; border: none; color: #6d5fa3;
+      cursor: pointer; font-size: 0.95rem; margin-left: auto;
+      flex-shrink: 0; padding: 0;
+    }
+
+    /* ══ SITE FOOTER ══ */
+    .site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      margin-top: 40px;
+      text-align: center;
+    }
+    .site-footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .footer-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .footer-logo span { color: var(--orange); }
+    .footer-tagline {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      max-width: 420px;
+      line-height: 1.6;
+    }
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer-links a {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-divider {
+      width: 40px; height: 2px;
+      background: var(--border);
+      border-radius: 1px;
+    }
+    .footer-disclaimer {
+      font-size: 0.72rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.65;
+    }
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    .footer-copy span { color: var(--orange); }
   </style>
 </head>
 <body>
@@ -349,12 +476,12 @@
         <div><div class="card-title">Quick Presets</div><div class="card-sub">1-click wheel setups</div></div>
       </div>
       <div class="preset-grid" id="presetGrid">
-        <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken">🍔 Takeaway Classics</button>
-        <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi">🥗 Healthy</button>
-        <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles">💸 Cheap Eats</button>
-        <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza">🌶️ Spicy</button>
-        <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas">🍷 Date Night</button>
-        <button class="preset-btn" data-foods="Breakfast,Bagel,Pancakes,Full English,Croissant">🍳 Breakfast</button>
+        <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken,Fish &amp; Chips,Fried Chicken,Tacos,Ramen,BBQ,Greek,Lebanese,Korean">🍔 Takeaway Classics</button>
+        <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi,Quinoa Bowl,Veggie Stir Fry,Avocado Toast,Grilled Salmon,Lentil Soup,Acai Bowl">🥗 Healthy</button>
+        <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles,Pot Noodle,Beans on Toast,Tinned Soup,Pasta Bake,Frozen Pizza,Rice &amp; Eggs">💸 Cheap Eats</button>
+        <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza,Vindaloo,Jerk Chicken,Szechuan Noodles,Nashville Hot,Ghost Pepper Burger,Kimchi Fried Rice">🌶️ Spicy</button>
+        <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas,Lobster,Risotto,Lamb Chops,Duck Confit,Truffle Pasta,Oysters,Beef Wellington">🍷 Date Night</button>
+        <button class="preset-btn" data-foods="Full English,Bagel,Pancakes,Avocado Toast,Croissant,French Toast,Eggs Benedict,Granola Bowl,Smashed Avo,Breakfast Burrito,Waffles,Overnight Oats">🍳 Breakfast</button>
       </div>
       <div class="save-preset-row">
         <input class="save-preset-input" id="savePresetInput" placeholder="Name your preset..."/>
@@ -417,6 +544,13 @@
       <p>Stop scrolling. Spin the wheel and decide in seconds.</p>
     </div>
 
+
+    <!-- Mobile shared banner -->
+    <div class="mobile-shared-banner" id="mSharedBanner">
+      <span>🔗</span>
+      <div><strong>Shared Wheel!</strong> Someone sent you this custom wheel.</div>
+      <button class="mobile-shared-banner-dismiss" id="mDismissBanner">✕</button>
+    </div>
     <div class="mobile-btns">
       <button class="btn btn-white" id="mSpinBtn">🍔 Spin</button>
       <button class="btn btn-orange" id="mInstantBtn">⚡ Pick Instantly</button>
@@ -446,12 +580,12 @@
         <div><div class="card-title">Quick Presets</div><div class="card-sub">1-click wheel setups</div></div>
       </div>
       <div class="mobile-preset-grid" id="mPresetGrid">
-        <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken">🍔 Takeaway</button>
-        <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi">🥗 Healthy</button>
-        <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles">💸 Cheap Eats</button>
-        <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza">🌶️ Spicy</button>
-        <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas">🍷 Date Night</button>
-        <button class="preset-btn" data-foods="Breakfast,Bagel,Pancakes,Full English,Croissant">🍳 Breakfast</button>
+        <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken,Fish &amp; Chips,Fried Chicken,Tacos,Ramen,BBQ,Greek,Lebanese,Korean">🍔 Takeaway</button>
+        <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi,Quinoa Bowl,Veggie Stir Fry,Avocado Toast,Grilled Salmon,Lentil Soup,Acai Bowl">🥗 Healthy</button>
+        <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles,Pot Noodle,Beans on Toast,Tinned Soup,Pasta Bake,Frozen Pizza,Rice &amp; Eggs">💸 Cheap Eats</button>
+        <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza,Vindaloo,Jerk Chicken,Szechuan Noodles,Nashville Hot,Ghost Pepper Burger,Kimchi Fried Rice">🌶️ Spicy</button>
+        <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas,Lobster,Risotto,Lamb Chops,Duck Confit,Truffle Pasta,Oysters,Beef Wellington">🍷 Date Night</button>
+        <button class="preset-btn" data-foods="Full English,Bagel,Pancakes,Avocado Toast,Croissant,French Toast,Eggs Benedict,Granola Bowl,Smashed Avo,Breakfast Burrito,Waffles,Overnight Oats">🍳 Breakfast</button>
       </div>
       <div class="save-preset-row">
         <input class="save-preset-input" id="mSavePresetInput" placeholder="Name your preset..."/>
@@ -985,11 +1119,53 @@ document.querySelectorAll('.preset-btn:not(.custom-preset)').forEach(btn=>{
 window.addEventListener('resize',()=>{resetBothSpinners();renderAll();});
 
 // ══════════════════════════════════════════════════
+// SHARED WHEEL BANNER
+// ══════════════════════════════════════════════════
+function showSharedBanner() {
+  ['sharedBanner','mSharedBanner'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.add('show');
+  });
+}
+function hideSharedBanner() {
+  ['sharedBanner','mSharedBanner'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('show');
+  });
+}
+const dismissBtn = document.getElementById('dismissBanner');
+const mDismissBtn = document.getElementById('mDismissBanner');
+if (dismissBtn) dismissBtn.addEventListener('click', hideSharedBanner);
+if (mDismissBtn) mDismissBtn.addEventListener('click', hideSharedBanner);
+
+// ══════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════
 renderSavedPresets();
 renderAll();
-if(getFoodsFromURL()) showToast('🔗 Wheel loaded from shared link!');
+if (getFoodsFromURL()) {
+  showSharedBanner();
+}
 </script>
+<!-- ══ SITE FOOTER ══ -->
+<footer class="site-footer">
+  <div class="site-footer-inner">
+    <div class="footer-logo">Spin<span>ForFood</span>.com</div>
+    <p class="footer-tagline">The world's most important decision engine. Stop scrolling Deliveroo and let fate choose your dinner.</p>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="https://wa.me/?text=Check%20this%20out%3A%20https%3A%2F%2Fwww.spinforfood.com" target="_blank" rel="noopener">Share</a>
+      <a href="mailto:hello@spinforfood.com">Contact</a>
+    </div>
+    <div class="footer-divider"></div>
+    <p class="footer-disclaimer">
+      SpinForFood is a free, independent tool for the truly indecisive. 
+      We are not responsible for any food regrets, arguments about where to order from, 
+      or accidental Deliveroo overspend caused by this site. Spin responsibly. 🎡
+    </p>
+    <p class="footer-copy">© 2026 <span>SpinForFood.com</span> — Made for hungry, indecisive people everywhere.</p>
+  </div>
+</footer>
+
 </body>
 </html>
