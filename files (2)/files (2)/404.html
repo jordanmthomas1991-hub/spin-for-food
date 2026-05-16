@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 — Page Not Found | Spin For Food</title>
+  <meta name="description" content="Looks like this page doesn't exist. Let the wheel decide where to go next."/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root[data-theme="dark"] {
+      --bg: #0a0a0a; --surface: #141414; --surface2: #1a1a1a;
+      --border: #222; --orange: #f97316; --orange-dark: #c2570e;
+      --text: #e5e5e5; --text-dim: #888; --muted: #555;
+      --wheel-border: #ffffff;
+    }
+    :root[data-theme="light"] {
+      --bg: #f5f5f0; --surface: #ffffff; --surface2: #f0f0ec;
+      --border: #e0e0d8; --orange: #f97316; --orange-dark: #c2570e;
+      --text: #111111; --text-dim: #666; --muted: #999;
+      --wheel-border: #111111;
+    }
+
+    html, body { height: 100%; overflow-x: hidden; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 24px;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+    }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      position: fixed; top: 16px; right: 16px; z-index: 100;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 50%; width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 1.2rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+      transition: transform 0.15s, border-color 0.2s;
+    }
+    .theme-toggle:hover { transform: scale(1.1); border-color: var(--orange); }
+
+    /* ── FLOATING BG EMOJIS ── */
+    .bg-emoji {
+      position: fixed; font-size: 2rem; opacity: 0;
+      pointer-events: none; user-select: none; z-index: 0;
+      animation: floatBg linear infinite;
+    }
+    @keyframes floatBg {
+      0%   { opacity: 0; transform: translateY(100vh) rotate(0deg); }
+      10%  { opacity: 0.12; }
+      90%  { opacity: 0.12; }
+      100% { opacity: 0; transform: translateY(-120px) rotate(360deg); }
+    }
+
+    /* ── MAIN CONTAINER ── */
+    .container {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      max-width: 560px; width: 100%;
+      gap: 0;
+    }
+
+    /* ── SPINNING WHEEL ── */
+    .wheel-wrap {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .pointer-svg {
+      display: block;
+      margin: 0 auto -3px;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.8));
+    }
+
+    .wheel-outer {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 8px solid var(--wheel-border);
+      position: relative;
+      box-shadow: 0 0 0 2px var(--border), 0 0 48px rgba(249,115,22,0.2);
+      overflow: hidden;
+    }
+
+    #wheel404Canvas {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      display: block;
+      animation: spin404 12s linear infinite;
+    }
+
+    @keyframes spin404 {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* Glow ring that pulses */
+    .wheel-glow {
+      position: absolute; inset: -12px; border-radius: 50%;
+      animation: glowPulse 2s ease-in-out infinite;
+      pointer-events: none;
+    }
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 20px 8px rgba(249,115,22,0.3); }
+      50%       { box-shadow: 0 0 40px 16px rgba(249,115,22,0.55); }
+    }
+
+    /* Centre button */
+    .wheel-center-404 {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--bg); border: 4px solid var(--wheel-border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: 0.08em;
+      color: var(--text); z-index: 5;
+      box-shadow: 0 0 0 2px var(--border);
+    }
+
+    /* ── 404 TEXT ── */
+    .error-tag {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 10px;
+    }
+
+    .error-code {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(80px, 18vw, 140px);
+      line-height: 0.9; letter-spacing: 0.04em;
+      color: var(--text);
+      position: relative;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    /* The "0" in 404 is the wheel — hide the middle zero */
+    .error-code .zero { color: transparent; }
+
+    .error-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(22px, 5vw, 36px);
+      letter-spacing: 0.04em;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .error-sub {
+      font-size: 0.97rem; color: var(--text-dim);
+      line-height: 1.7; max-width: 400px;
+      margin: 0 auto 32px;
+    }
+
+    .error-sub strong { color: var(--orange); font-weight: 700; }
+
+    /* ── SUGGESTION CARD ── */
+    .suggestion-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      width: 100%;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .suggestion-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+    }
+
+    .suggestion-label {
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+
+    .suggestion-food {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.2rem; letter-spacing: 0.04em;
+      color: var(--text); line-height: 1;
+      margin-bottom: 4px;
+      animation: foodPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes foodPop {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .suggestion-note {
+      font-size: 0.8rem; color: var(--text-dim);
+    }
+
+    .respin-btn {
+      background: none; border: none; color: var(--orange);
+      font-size: 0.78rem; font-weight: 700; cursor: pointer;
+      font-family: 'DM Sans', sans-serif; padding: 0;
+      transition: opacity 0.15s;
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+    .respin-btn:hover { opacity: 0.7; }
+
+    /* ── BUTTONS ── */
+    .btn-row {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      justify-content: center; width: 100%;
+    }
+
+    .btn {
+      padding: 13px 28px; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem; font-weight: 700;
+      border: none; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 7px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-orange {
+      background: var(--orange); color: #fff;
+      box-shadow: 0 4px 24px rgba(249,115,22,0.35);
+    }
+    .btn-orange:hover { box-shadow: 0 8px 32px rgba(249,115,22,0.5); }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+    .btn-ghost:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ── FOOTER NOTE ── */
+    .footer-note {
+      position: fixed; bottom: 20px; left: 0; right: 0;
+      text-align: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem; letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .footer-note span { color: var(--orange); }
+
+    /* ── CONFETTI ── */
+    #confetti404 {
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .wheel-outer { width: 160px; height: 160px; }
+      .wheel-center-404 { width: 48px; height: 48px; font-size: 0.8rem; }
+      .btn-row { flex-direction: column; align-items: center; }
+      .btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="confetti404"></canvas>
+
+<!-- THEME TOGGLE -->
+<button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+
+<!-- FLOATING BACKGROUND FOOD EMOJIS -->
+<div class="bg-emojis" id="bgEmojis"></div>
+
+<div class="container">
+
+  <!-- SPINNING WHEEL as the centrepiece -->
+  <div class="wheel-wrap">
+    <svg class="pointer-svg" width="28" height="22" viewBox="0 0 40 32">
+      <polygon points="20,32 1,3 39,3" fill="#ffffff" stroke="#111" stroke-width="1.5" stroke-linejoin="round"/>
+    </svg>
+    <div style="position:relative;display:inline-block;">
+      <div class="wheel-glow"></div>
+      <div class="wheel-outer">
+        <canvas id="wheel404Canvas"></canvas>
+      </div>
+      <div class="wheel-center-404">404</div>
+    </div>
+  </div>
+
+  <!-- ERROR TEXT -->
+  <p class="error-tag">Spin For Food</p>
+  <h1 class="error-title">The wheel spun. Nothing landed here.</h1>
+
+  <p class="error-sub">
+    This page doesn't exist — but hey, at least the wheel is still spinning.
+    While you're here, we picked tonight's dinner for you.
+    <strong>You're welcome.</strong>
+  </p>
+
+  <!-- DINNER SUGGESTION CARD -->
+  <div class="suggestion-card">
+    <div class="suggestion-label">🎡 Tonight's Emergency Suggestion</div>
+    <div class="suggestion-food" id="suggestionFood">Loading...</div>
+    <div class="suggestion-note">
+      Not feeling it? <button class="respin-btn" id="respinBtn">Spin again ↻</button>
+    </div>
+  </div>
+
+  <!-- BUTTONS -->
+  <div class="btn-row">
+    <a class="btn btn-orange" href="/">
+      🎡 Back to the Wheel
+    </a>
+    <a class="btn btn-ghost" href="/">
+      🏠 Go Home
+    </a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer-note">
+  spin<span>forfood</span>.com
+</div>
+
+<script>
+  // ── WHEEL DATA (must be defined before applyTheme calls drawWheel) ──
+  const SEG_COLORS = [
+    ['#ff8c00','#ffb347'],['#e63946','#ff6b6b'],['#7c3aed','#a78bfa'],
+    ['#0891b2','#22d3ee'],['#16a34a','#4ade80'],['#ca8a04','#fde047'],
+    ['#db2777','#f472b6'],['#2563eb','#60a5fa'],
+  ];
+
+  const WHEEL_FOODS = ['Pizza','Kebab','Sushi','Curry','Burgers','Thai','Noodles','Tacos'];
+
+  // ── THEME ──
+  const html = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  let isDark = localStorage.getItem('spinTheme') !== 'light';
+  function applyTheme() {
+    html.setAttribute('data-theme', isDark ? 'dark' : 'light');
+    toggle.textContent = isDark ? '🌙' : '☀️';
+    drawWheel();
+  }
+  toggle.addEventListener('click', () => { isDark = !isDark; localStorage.setItem('spinTheme', isDark ? 'dark' : 'light'); applyTheme(); });
+  applyTheme();
+
+  // ── WHEEL DRAW ──
+  function drawWheel() {
+    const cv = document.getElementById('wheel404Canvas');
+    const size = cv.parentElement.offsetWidth || 200;
+    cv.width = size; cv.height = size;
+    const ctx = cv.getContext('2d');
+    const center = size / 2, radius = size / 2 - 1;
+    const n = WHEEL_FOODS.length;
+    const step = (Math.PI * 2) / n;
+    const offset = -Math.PI / 2;
+
+    ctx.clearRect(0, 0, size, size);
+
+    WHEEL_FOODS.forEach((food, i) => {
+      const aStart = offset + i * step;
+      const aEnd   = aStart + step;
+      const aMid   = aStart + step / 2;
+      const [cBase, cLight] = SEG_COLORS[i % SEG_COLORS.length];
+
+      const gx1 = center + Math.cos(aMid) * radius * 0.1;
+      const gy1 = center + Math.sin(aMid) * radius * 0.1;
+      const gx2 = center + Math.cos(aMid) * radius * 0.95;
+      const gy2 = center + Math.sin(aMid) * radius * 0.95;
+      const grad = ctx.createLinearGradient(gx1, gy1, gx2, gy2);
+      grad.addColorStop(0, cLight);
+      grad.addColorStop(1, cBase);
+
+      ctx.beginPath();
+      ctx.moveTo(center, center);
+      ctx.arc(center, center, radius, aStart, aEnd);
+      ctx.closePath();
+      ctx.fillStyle = grad;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(0,0,0,0.4)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Small emoji label
+      const labelR = radius * 0.62;
+      const lx = center + Math.cos(aMid) * labelR;
+      const ly = center + Math.sin(aMid) * labelR;
+      ctx.save();
+      ctx.translate(lx, ly);
+      ctx.rotate(aMid + Math.PI / 2);
+      ctx.font = `700 ${size <= 170 ? 7 : 9}px "DM Sans", sans-serif`;
+      ctx.fillStyle = '#fff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(food, 0, 0);
+      ctx.restore();
+    });
+  }
+
+  drawWheel();
+  window.addEventListener('resize', drawWheel);
+
+  // ── DINNER SUGGESTION ──
+  const ALL_FOODS = [
+    'Pizza 🍕','Kebab 🥙','Sushi 🍣','Curry 🍛','Burgers 🍔',
+    'Thai 🍜','Chinese 🥢','Tacos 🌮','Pasta 🍝','Ramen 🍜',
+    'Fried Chicken 🍗','Steak 🥩','Fish & Chips 🐟','Noodles 🍜',
+    'Indian 🍛','Poke Bowl 🥗','Peri Peri 🌶️','BBQ Ribs 🍖',
+  ];
+
+  const foodEl = document.getElementById('suggestionFood');
+
+  function pickFood() {
+    const pick = ALL_FOODS[Math.floor(Math.random() * ALL_FOODS.length)];
+    foodEl.style.animation = 'none';
+    void foodEl.offsetWidth;
+    foodEl.style.animation = 'foodPop 0.4s cubic-bezier(0.34,1.56,0.64,1) both';
+    foodEl.textContent = pick;
+  }
+
+  pickFood();
+  document.getElementById('respinBtn').addEventListener('click', () => {
+    pickFood();
+    miniConfetti();
+  });
+
+  // ── FLOATING BG EMOJIS ──
+  const BG_EMOJIS = ['🍕','🥙','🍣','🍛','🍔','🍜','🥢','🌮','🍝','🍗','🥗','🌶️'];
+  const bgContainer = document.getElementById('bgEmojis');
+
+  function spawnBgEmoji() {
+    const el = document.createElement('div');
+    el.className = 'bg-emoji';
+    el.textContent = BG_EMOJIS[Math.floor(Math.random() * BG_EMOJIS.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (1.2 + Math.random() * 1.4) + 'rem';
+    const dur = 8 + Math.random() * 10;
+    el.style.animationDuration = dur + 's';
+    el.style.animationDelay = Math.random() * 3 + 's';
+    document.body.appendChild(el);
+    setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, (dur + 4) * 1000);
+  }
+
+  // Spawn initial batch
+  for (let i = 0; i < 6; i++) {
+    setTimeout(spawnBgEmoji, i * 600);
+  }
+  setInterval(spawnBgEmoji, 2200);
+
+  // ── MINI CONFETTI on respin ──
+  const confCv = document.getElementById('confetti404');
+  const confCtx = confCv.getContext('2d');
+  let confParts = [], confAF = null;
+  const confColors = ['#f97316','#ef4444','#8b5cf6','#06b6d4','#22c55e','#eab308','#ec4899'];
+
+  function miniConfetti() {
+    confCv.width = window.innerWidth;
+    confCv.height = window.innerHeight;
+    // Burst from centre
+    const cx = window.innerWidth / 2;
+    const cy = window.innerHeight / 2;
+    confParts = Array.from({ length: 60 }, () => ({
+      x: cx, y: cy,
+      w: 6 + Math.random() * 7, h: 3 + Math.random() * 5,
+      color: confColors[Math.floor(Math.random() * confColors.length)],
+      vx: (Math.random() - 0.5) * 14,
+      vy: -6 - Math.random() * 10,
+      angle: Math.random() * Math.PI * 2,
+      spin: (Math.random() - 0.5) * 0.3,
+      opacity: 1,
+    }));
+    if (confAF) cancelAnimationFrame(confAF);
+    animConf();
+  }
+
+  function animConf() {
+    confCtx.clearRect(0, 0, confCv.width, confCv.height);
+    let alive = false;
+    confParts.forEach(p => {
+      p.x += p.vx; p.y += p.vy; p.vy += 0.4;
+      p.angle += p.spin; p.opacity -= 0.022;
+      if (p.opacity > 0) alive = true;
+      confCtx.save();
+      confCtx.globalAlpha = Math.max(0, p.opacity);
+      confCtx.translate(p.x, p.y); confCtx.rotate(p.angle);
+      confCtx.fillStyle = p.color;
+      confCtx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      confCtx.restore();
+    });
+    if (alive) confAF = requestAnimationFrame(animConf);
+    else confCtx.clearRect(0, 0, confCv.width, confCv.height);
+  }
+
+  // ── EASTER EGG: click the wheel 5 times for big confetti ──
+  let wheelClicks = 0;
+  document.querySelector('.wheel-outer').addEventListener('click', () => {
+    wheelClicks++;
+    if (wheelClicks >= 5) {
+      wheelClicks = 0;
+      // Big burst
+      confCv.width = window.innerWidth;
+      confCv.height = window.innerHeight;
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 3;
+      confParts = Array.from({ length: 200 }, () => ({
+        x: cx + (Math.random()-0.5)*200, y: cy,
+        w: 7 + Math.random() * 9, h: 4 + Math.random() * 6,
+        color: confColors[Math.floor(Math.random() * confColors.length)],
+        vx: (Math.random() - 0.5) * 18,
+        vy: -4 - Math.random() * 12,
+        angle: Math.random() * Math.PI * 2,
+        spin: (Math.random() - 0.5) * 0.25,
+        opacity: 1,
+      }));
+      if (confAF) cancelAnimationFrame(confAF);
+      animConf();
+    }
+  });
+</script>
+</body>
+</html>
