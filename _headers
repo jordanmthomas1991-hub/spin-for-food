@@ -1,0 +1,14 @@
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/og-image.png
+  Content-Type: image/png
+  Cache-Control: public, max-age=86400
+  Access-Control-Allow-Origin: *
+
+/robots.txt
+  Content-Type: text/plain
+  Cache-Control: public, max-age=3600
+  Access-Control-Allow-Origin: *

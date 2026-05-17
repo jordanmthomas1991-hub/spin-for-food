@@ -1,5 +1,16 @@
 User-agent: facebookexternalhit
-Disallow:
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: Slackbot
+Allow: /
 
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://www.spinforfood.com/sitemap.xml
