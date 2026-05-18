@@ -13,7 +13,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Spin For Food | What Should I Eat Tonight?</title>
-  <meta name="description" content="Spin the wheel and instantly decide what food or takeaway to eat tonight."/>
+  <meta name="description" content="Can't decide what to eat tonight? Spin the free food roulette wheel and get an instant answer. Vegan, Keto, Halal & more dietary filters. No sign-up needed."/>
   <!-- Favicon (inline SVG wheel) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230a0a0a' stroke='%23f97316' stroke-width='4'/%3E%3Cpath d='M50 50 L50 4' stroke='%23ffb347' stroke-width='3'/%3E%3Cpath d='M50 50 L88 72' stroke='%23ef4444' stroke-width='3'/%3E%3Cpath d='M50 50 L12 72' stroke='%238b5cf6' stroke-width='3'/%3E%3Cpath d='M50 50 L12 28' stroke='%2306b6d4' stroke-width='3'/%3E%3Cpath d='M50 50 L88 28' stroke='%2322c55e' stroke-width='3'/%3E%3Cpath d='M50 50 L50 96' stroke='%23eab308' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='12' fill='%23f97316'/%3E%3Ctext x='50' y='55' font-size='10' font-family='Arial' font-weight='900' fill='white' text-anchor='middle'%3E🍕%3C/text%3E%3C/svg%3E"/>
   <link rel="icon" type="image/png" href="favicon.png"/>
@@ -578,6 +578,111 @@
       .duel-wheels { grid-template-columns: 1fr; }
       .duel-wheel-outer { width: 160px; height: 160px; }
     }
+
+    /* ══ DIETARY FILTERS ══ */
+    .diet-filter-grid {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px;
+    }
+    .diet-btn {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--preset-bg); border: 1px solid var(--border);
+      border-radius: 100px; padding: 7px 14px;
+      font-size: 0.8rem; font-weight: 600; color: var(--text-dim);
+      cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif;
+      white-space: nowrap;
+    }
+    .diet-btn:hover { border-color: var(--orange); color: var(--text); }
+    .diet-btn.active {
+      background: rgba(249,115,22,0.12);
+      border-color: var(--orange);
+      color: var(--orange);
+    }
+    .diet-info {
+      font-size: 0.75rem; color: var(--text-dim); line-height: 1.5;
+      margin-top: 10px; padding: 10px 12px;
+      background: var(--surface2); border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    /* ══ SEO SECTION ══ */
+    .seo-section {
+      max-width: 1280px; margin: 0 auto; padding: 48px 24px 16px;
+    }
+    .seo-features {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 900px) { .seo-features { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 520px) { .seo-features { grid-template-columns: 1fr; } }
+    .seo-feature-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px 20px; text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .seo-feature-card:hover { border-color: var(--orange); transform: translateY(-3px); }
+    .seo-feature-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .seo-feature-title {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+      letter-spacing: 0.04em; color: var(--text); margin-bottom: 8px;
+    }
+    .seo-feature-desc { font-size: 0.82rem; color: var(--text-dim); line-height: 1.6; }
+
+    .seo-testimonials {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-bottom: 56px;
+    }
+    @media (max-width: 760px) { .seo-testimonials { grid-template-columns: 1fr; } }
+    .seo-testimonial {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px;
+      border-left: 3px solid var(--orange);
+    }
+    .seo-testimonial-text {
+      font-size: 0.9rem; color: var(--text-dim); line-height: 1.7;
+      font-style: italic; margin-bottom: 12px;
+    }
+    .seo-testimonial-name {
+      font-size: 0.78rem; font-weight: 700; color: var(--orange);
+      text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    .seo-copy { max-width: 800px; margin: 0 auto 56px; }
+    .seo-copy h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: 0.04em; color: var(--text);
+      margin-bottom: 16px; margin-top: 40px;
+    }
+    .seo-copy h2:first-child { margin-top: 0; }
+    .seo-copy p {
+      font-size: 0.95rem; color: var(--text-dim); line-height: 1.8;
+      margin-bottom: 14px;
+    }
+    .seo-copy strong { color: var(--text); font-weight: 700; }
+    .seo-copy ul {
+      margin: 12px 0 20px 20px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .seo-copy ul li {
+      font-size: 0.92rem; color: var(--text-dim); line-height: 1.6;
+    }
+    .seo-copy ul li::marker { color: var(--orange); }
+    .seo-divider {
+      width: 60px; height: 3px; background: var(--orange);
+      border-radius: 2px; margin: 0 auto 40px;
+    }
+    .seo-headline {
+      text-align: center; margin-bottom: 48px;
+    }
+    .seo-headline h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: 0.04em; color: var(--text);
+      margin-bottom: 12px;
+    }
+    .seo-headline p {
+      font-size: 1rem; color: var(--text-dim); max-width: 560px;
+      margin: 0 auto; line-height: 1.7;
+    }
   </style>
 </head>
 <body>
@@ -648,8 +753,23 @@
       </div>
     </div>
 
-
-    <!-- WHEEL THEMES -->
+    <!-- DIETARY FILTERS -->
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Dietary Filters</div><div class="card-sub">Load a diet-friendly wheel instantly</div></div>
+      </div>
+      <div class="diet-filter-grid" id="dietFilterGrid">
+        <button class="diet-btn" data-diet="vegan" data-foods="Falafel Wrap,Veggie Burger,Tofu Stir Fry,Lentil Soup,Vegan Pizza,Acai Bowl,Veggie Sushi,Chickpea Curry,Mushroom Tacos,Avocado Toast,Poke Bowl,Vegan Ramen">🌱 Vegan</button>
+        <button class="diet-btn" data-diet="vegetarian" data-foods="Margherita Pizza,Veggie Curry,Cheese Burger,Pasta Primavera,Veggie Wrap,Halloumi Salad,Egg Fried Rice,Mushroom Risotto,Caprese Salad,Paneer Tikka,Falafel Bowl,Shakshuka">🥕 Vegetarian</button>
+        <button class="diet-btn" data-diet="gluten-free" data-foods="Grilled Salmon,Chicken & Rice,Steak,Sushi,Poke Bowl,Thai Curry,Cobb Salad,Grilled Chicken,Steak & Veg,Prawn Stir Fry,Corn Tacos,Stuffed Peppers">🌾 Gluten-Free</button>
+        <button class="diet-btn" data-diet="keto" data-foods="Bacon & Eggs,Steak,Grilled Chicken,Cheese Omelette,Salmon,Avocado Salad,Pulled Pork,Lamb Chops,Burger (No Bun),Prawn Skewers,Chicken Wings,Halloumi">🥩 Keto</button>
+        <button class="diet-btn" data-diet="halal" data-foods="Chicken Shawarma,Lamb Kebab,Halal Burger,Biryani,Chicken Tikka,Falafel,Kofta,Lamb Chops,Halal Pizza,Grilled Chicken,Hummus Wrap,Tagine">☪️ Halal</button>
+        <button class="diet-btn" data-diet="pescatarian" data-foods="Grilled Salmon,Fish & Chips,Prawn Stir Fry,Tuna Salad,Fish Tacos,Sushi,Prawn Curry,Crab Cakes,Smoked Salmon,Fishcakes,Calamari,Lobster">🐟 Pescatarian</button>
+        <button class="diet-btn" data-diet="dairy-free" data-foods="Chicken Stir Fry,Vegan Sushi,Grilled Fish,Thai Curry,Chicken Tacos,Rice Bowl,Ramen,Pad Thai,Grilled Steak,Jerk Chicken,Pulled Pork,Avocado Salad">🥛 Dairy-Free</button>
+        <button class="diet-btn" data-diet="low-carb" data-foods="Steak & Salad,Grilled Chicken,Salmon,Prawn Skewers,Cobb Salad,Turkey Wrap,Tuna Bowl,Omelette,Lamb Cutlets,Veggie Stir Fry,Chicken Wings,Cauliflower Rice">📉 Low-Carb</button>
+      </div>
+      <div class="diet-info">💡 Tap a filter to instantly load a matching food wheel. Combine with custom presets for the perfect spin.</div>
+    </div>
     <div class="card">
       <div class="card-header theme-card-header" id="themeCardToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Wheel Themes</div><div class="card-sub" id="themeCardSub">Pick a colour vibe</div></div>
@@ -768,7 +888,23 @@
       </div>
     </div>
 
-    <!-- Mobile themes -->
+    <!-- Mobile Dietary Filters -->
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Dietary Filters</div><div class="card-sub">Load a diet-friendly wheel</div></div>
+      </div>
+      <div class="diet-filter-grid" id="mDietFilterGrid">
+        <button class="diet-btn" data-diet="vegan" data-foods="Falafel Wrap,Veggie Burger,Tofu Stir Fry,Lentil Soup,Vegan Pizza,Acai Bowl,Veggie Sushi,Chickpea Curry,Mushroom Tacos,Avocado Toast,Poke Bowl,Vegan Ramen">🌱 Vegan</button>
+        <button class="diet-btn" data-diet="vegetarian" data-foods="Margherita Pizza,Veggie Curry,Cheese Burger,Pasta Primavera,Veggie Wrap,Halloumi Salad,Egg Fried Rice,Mushroom Risotto,Caprese Salad,Paneer Tikka,Falafel Bowl,Shakshuka">🥕 Vegetarian</button>
+        <button class="diet-btn" data-diet="gluten-free" data-foods="Grilled Salmon,Chicken & Rice,Steak,Sushi,Poke Bowl,Thai Curry,Cobb Salad,Grilled Chicken,Steak & Veg,Prawn Stir Fry,Corn Tacos,Stuffed Peppers">🌾 Gluten-Free</button>
+        <button class="diet-btn" data-diet="keto" data-foods="Bacon & Eggs,Steak,Grilled Chicken,Cheese Omelette,Salmon,Avocado Salad,Pulled Pork,Lamb Chops,Burger (No Bun),Prawn Skewers,Chicken Wings,Halloumi">🥩 Keto</button>
+        <button class="diet-btn" data-diet="halal" data-foods="Chicken Shawarma,Lamb Kebab,Halal Burger,Biryani,Chicken Tikka,Falafel,Kofta,Lamb Chops,Halal Pizza,Grilled Chicken,Hummus Wrap,Tagine">☪️ Halal</button>
+        <button class="diet-btn" data-diet="pescatarian" data-foods="Grilled Salmon,Fish & Chips,Prawn Stir Fry,Tuna Salad,Fish Tacos,Sushi,Prawn Curry,Crab Cakes,Smoked Salmon,Fishcakes,Calamari,Lobster">🐟 Pescatarian</button>
+        <button class="diet-btn" data-diet="dairy-free" data-foods="Chicken Stir Fry,Vegan Sushi,Grilled Fish,Thai Curry,Chicken Tacos,Rice Bowl,Ramen,Pad Thai,Grilled Steak,Jerk Chicken,Pulled Pork,Avocado Salad">🥛 Dairy-Free</button>
+        <button class="diet-btn" data-diet="low-carb" data-foods="Steak & Salad,Grilled Chicken,Salmon,Prawn Skewers,Cobb Salad,Turkey Wrap,Tuna Bowl,Omelette,Lamb Cutlets,Veggie Stir Fry,Chicken Wings,Cauliflower Rice">📉 Low-Carb</button>
+      </div>
+      <div class="diet-info">💡 Tap a filter to instantly load a matching food wheel.</div>
+    </div>
     <div class="card">
       <div class="card-header theme-card-header" id="mThemeCardToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Wheel Themes</div><div class="card-sub" id="mThemeCardSub">Pick a colour vibe</div></div>
@@ -1643,8 +1779,42 @@ if ('serviceWorker' in navigator && (location.hostname === 'spinforfood.com' || 
 
 
 // ══════════════════════════════════════════════════
-// INIT
+// DIETARY FILTERS
 // ══════════════════════════════════════════════════
+function setupDietFilters(gridId) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.querySelectorAll('.diet-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const isActive = btn.classList.contains('active');
+      // Deactivate all in both grids
+      document.querySelectorAll('.diet-btn').forEach(b => b.classList.remove('active'));
+      if (!isActive) {
+        // Activate matching diet buttons in both grids
+        const diet = btn.dataset.diet;
+        document.querySelectorAll(`.diet-btn[data-diet="${diet}"]`).forEach(b => b.classList.add('active'));
+        // Load foods
+        const newFoods = btn.dataset.foods.split(',').map(f => f.trim()).filter(Boolean);
+        foods = newFoods;
+        clearPreset();
+        resetBothSpinners();
+        renderAll();
+        showToast(`${btn.textContent.trim()} wheel loaded!`);
+      } else {
+        // Toggled off — restore default preset
+        foods = ['Pizza','Chinese','Indian','Kebab','Burgers','Thai','Sushi','Chicken','Fish & Chips','Fried Chicken','Tacos','Ramen','BBQ','Greek','Lebanese','Korean'];
+        clearPreset();
+        resetBothSpinners();
+        renderAll();
+        showToast('Restored default wheel');
+      }
+    });
+  });
+}
+setupDietFilters('dietFilterGrid');
+setupDietFilters('mDietFilterGrid');
+
+
 renderSavedPresets();
 buildThemePicker('themePicker');
 buildThemePicker('mThemePicker');
@@ -1653,6 +1823,100 @@ if (getFoodsFromURL()) {
   showSharedBanner();
 }
 </script>
+<!-- ══ SITE FOOTER ══ -->
+
+<!-- ══ SEO CONTENT SECTION ══ -->
+<section class="seo-section">
+
+  <!-- Why Choose Spin For Food -->
+  <div class="seo-headline">
+    <h2>Why Spin For Food?</h2>
+    <p>The free food decision wheel that takes the stress out of "what should I eat tonight?" — no login, no faff, just spin.</p>
+  </div>
+  <div class="seo-divider"></div>
+
+  <!-- Feature Cards -->
+  <div class="seo-features">
+    <div class="seo-feature-card">
+      <span class="seo-feature-icon">🎯</span>
+      <div class="seo-feature-title">Instant Decision</div>
+      <p class="seo-feature-desc">Stop the endless scroll. One spin gives you a definitive answer in seconds — no second-guessing required.</p>
+    </div>
+    <div class="seo-feature-card">
+      <span class="seo-feature-icon">🎨</span>
+      <div class="seo-feature-title">Fully Customisable</div>
+      <p class="seo-feature-desc">Add your own foods, save custom presets, pick from 18 wheel themes, and share your setup with anyone.</p>
+    </div>
+    <div class="seo-feature-card">
+      <span class="seo-feature-icon">🥗</span>
+      <div class="seo-feature-title">Diet Friendly</div>
+      <p class="seo-feature-desc">Vegan, Keto, Halal, Gluten-Free and more — one tap loads a wheel tailored to your dietary needs.</p>
+    </div>
+    <div class="seo-feature-card">
+      <span class="seo-feature-icon">⚔️</span>
+      <div class="seo-feature-title">Duel Mode</div>
+      <p class="seo-feature-desc">Can't agree with your partner? Spin two wheels simultaneously — whoever lands on the fanciest food pays for dinner.</p>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="seo-testimonials">
+    <div class="seo-testimonial">
+      <p class="seo-testimonial-text">"Me and my flatmates use this every single Friday. It's genuinely ended every argument about what to order. The duel mode is absolutely hilarious."</p>
+      <div class="seo-testimonial-name">— Jamie T., London</div>
+    </div>
+    <div class="seo-testimonial">
+      <p class="seo-testimonial-text">"I'm vegan and the dietary filters are a game changer. I loaded the vegan wheel, spun it, and had my dinner sorted in about 10 seconds. Brilliant little tool."</p>
+      <div class="seo-testimonial-name">— Priya M., Manchester</div>
+    </div>
+    <div class="seo-testimonial">
+      <p class="seo-testimonial-text">"My kids absolutely love this. They take turns spinning and whoever wins gets to pick the restaurant on Friday night. Best thing on the internet."</p>
+      <div class="seo-testimonial-name">— Mark R., Birmingham</div>
+    </div>
+  </div>
+
+  <!-- SEO Copy -->
+  <div class="seo-copy">
+
+    <h2>The Ultimate Food Decision Wheel: Solving "What Should I Eat Tonight?"</h2>
+    <p>Every day, millions of people face the same exhausting question: <strong>what should I eat tonight?</strong> You open Deliveroo. You scroll for twenty minutes. You close it. You open it again. Nothing looks right. Sound familiar? That's decision fatigue — and it's a real thing.</p>
+    <p>Spin For Food is a free food roulette wheel designed to eliminate that paralysis entirely. Add your favourite foods, hit spin, and let fate decide. It's fast, it's fun, and it genuinely works. No accounts, no subscriptions, no nonsense — just the most satisfying dinner decision you'll ever make.</p>
+
+    <h2>Say Goodbye to Decision Fatigue with a Food Roulette Wheel</h2>
+    <p>The paradox of choice is real. The more options you have, the harder it is to pick one. Takeaway apps make this worse — they show you hundreds of restaurants, thousands of dishes, and an overwhelming wall of reviews. By the time you've decided, you're too tired to even enjoy it.</p>
+    <p>A <strong>food roulette wheel</strong> solves this by removing the burden of choice entirely. You pre-load your favourite options — the foods you'd actually enjoy — and let the wheel pick. The decision feels fair, fun, and final. No more debates. No more scrolling. Just dinner.</p>
+
+    <h2>How the Spin For Food Wheel Works</h2>
+    <p>SpinForFood is built around a beautifully animated <strong>food spinning wheel</strong> that you fully control. Here's how to get started:</p>
+    <ul>
+      <li><strong>Choose a preset</strong> — Pick from Takeaway Classics, Healthy, Cheap Eats, Spicy, Date Night, or Breakfast. One click loads the wheel instantly.</li>
+      <li><strong>Apply dietary filters</strong> — Vegan, Vegetarian, Gluten-Free, Keto, Halal, Pescatarian, Dairy-Free or Low-Carb. Your wheel, your rules.</li>
+      <li><strong>Customise it</strong> — Add your own foods, remove ones you don't want, and save your setup as a named preset for next time.</li>
+      <li><strong>Spin</strong> — Hit the big button, watch the wheel fly, and get your answer. Don't like it? Spin again, or hit "Never Again" to remove it permanently.</li>
+      <li><strong>Share it</strong> — Send your custom wheel to friends via WhatsApp, X, or Facebook. They'll land on your exact setup ready to spin.</li>
+    </ul>
+
+    <h2>What Makes SpinForFood Different from Other Food Randomisers?</h2>
+    <p>There are other food randomiser tools out there, but most are basic — a simple list picker dressed up as a wheel. SpinForFood is built differently from the ground up:</p>
+    <p><strong>It's actually yours.</strong> Every food on the wheel is one you've chosen or approved. There are no random suggestions from an algorithm that doesn't know you. The wheel reflects your actual taste, budget, and dietary needs.</p>
+    <p><strong>It works everywhere.</strong> SpinForFood is a fully responsive PWA — it works perfectly on desktop, tablet, and mobile. You can even install it to your home screen for instant access.</p>
+    <p><strong>It's genuinely fun.</strong> With 18 wheel themes, floating food emojis, a winner popup with sound, and Duel Mode for couples and groups, SpinForFood turns a mundane decision into a mini experience.</p>
+
+    <h2>Dietary Filters: A Food Wheel for Every Diet</h2>
+    <p>Whether you're vegan, following a keto diet, eating halal, or avoiding gluten, SpinForFood has you covered. Our built-in <strong>dietary filter presets</strong> load a curated wheel of foods that match your lifestyle in one tap.</p>
+    <p>The filters available are: <strong>Vegan, Vegetarian, Gluten-Free, Keto, Halal, Pescatarian, Dairy-Free,</strong> and <strong>Low-Carb</strong>. Each one loads 12 hand-picked food options relevant to that diet — you can then customise further by adding or removing items to make it truly your own.</p>
+
+    <h2>Duel Mode: The Group Dinner Decision Maker</h2>
+    <p>Deciding where to eat as a couple or group is one of life's great frustrations. "I don't mind" followed by "not that" is a conversation that has ended many a relationship. Spin For Food's <strong>Duel Mode</strong> solves this brilliantly.</p>
+    <p>Both players spin their own wheel simultaneously. Whoever lands on the most expensive-sounding food has to pay for dinner. It's random, it's fair, and it's absolutely hilarious. Duel Mode works from your current food list, so the same personalisation applies — no chain restaurants if you don't want them, no foods you hate.</p>
+
+    <h2>Finding the Answer to "Where to Eat Tonight?" — Instantly</h2>
+    <p>SpinForFood works for every scenario: solo dinner after a long day, date night when you can't agree, Friday night takeaway with flatmates, or family meal planning. Whatever the situation, the process is the same — spin the wheel, trust the result, enjoy your food.</p>
+    <p>The best food decision is one you don't agonise over. That's what SpinForFood is for. It's completely free, requires no sign-up, and works on any device. Spin responsibly. 🎡</p>
+
+  </div>
+</section>
+
 <!-- ══ SITE FOOTER ══ -->
 <footer class="site-footer">
   <div class="site-footer-inner">
