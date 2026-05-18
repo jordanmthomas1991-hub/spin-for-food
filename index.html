@@ -451,6 +451,29 @@
     .theme-swatch-wrap {
       display: flex; flex-direction: column; align-items: center; gap: 3px;
     }
+    .theme-picker-collapse {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s;
+      opacity: 0;
+    }
+    .theme-picker-collapse.open {
+      max-height: 300px;
+      opacity: 1;
+    }
+    .theme-chevron {
+      color: var(--muted);
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1), color 0.15s;
+      flex-shrink: 0;
+    }
+    .theme-chevron.open { transform: rotate(180deg); color: var(--orange); }
+    .theme-active-swatch {
+      display: inline-block;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+    }
 
     /* ══ DUEL MODE ══ */
     .duel-overlay {
@@ -628,10 +651,16 @@
 
     <!-- WHEEL THEMES -->
     <div class="card">
-      <div class="card-header">
-        <div><div class="card-title">Wheel Themes</div><div class="card-sub">Pick a colour vibe</div></div>
+      <div class="card-header theme-card-header" id="themeCardToggle" style="cursor:pointer;user-select:none;">
+        <div><div class="card-title">Wheel Themes</div><div class="card-sub" id="themeCardSub">Pick a colour vibe</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="theme-active-swatch" id="themeActiveSwatch"></span>
+          <svg class="theme-chevron" id="themeChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
       </div>
-      <div class="theme-picker" id="themePicker"></div>
+      <div class="theme-picker-collapse" id="themePickerCollapse">
+        <div class="theme-picker" id="themePicker"></div>
+      </div>
     </div>
 
     <div class="card">
@@ -741,10 +770,16 @@
 
     <!-- Mobile themes -->
     <div class="card">
-      <div class="card-header">
-        <div><div class="card-title">Wheel Themes</div><div class="card-sub">Pick a colour vibe</div></div>
+      <div class="card-header theme-card-header" id="mThemeCardToggle" style="cursor:pointer;user-select:none;">
+        <div><div class="card-title">Wheel Themes</div><div class="card-sub" id="mThemeCardSub">Pick a colour vibe</div></div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="theme-active-swatch" id="mThemeActiveSwatch"></span>
+          <svg class="theme-chevron" id="mThemeChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
       </div>
-      <div class="theme-picker" id="mThemePicker"></div>
+      <div class="theme-picker-collapse" id="mThemePickerCollapse">
+        <div class="theme-picker" id="mThemePicker"></div>
+      </div>
     </div>
 
     <div class="card">
@@ -779,12 +814,11 @@
       <button class="duel-close" id="duelClose">✕</button>
     </div>
     <div class="duel-desc">
-      <strong>How it works:</strong> Player 1 and Player 2 each spin their own wheel. 
-      Whoever lands on the <strong>most expensive sounding food</strong> has to pay for dinner tonight! 
+      <strong>How it works:</strong> Player 1 and Player 2 each spin their own wheel.
+      Whoever lands on the <strong>most expensive sounding food</strong> has to pay for dinner tonight!
       Both wheels spin from your current food list. May the odds be ever in your favour. 🎲
     </div>
     <div class="duel-wheels">
-      <!-- Player 1 -->
       <div class="duel-player">
         <div class="duel-player-name">🔴 Player 1</div>
         <div style="position:relative;">
@@ -798,7 +832,6 @@
         </div>
         <div class="duel-result" id="duelResult1">—</div>
       </div>
-      <!-- Player 2 -->
       <div class="duel-player">
         <div class="duel-player-name">🔵 Player 2</div>
         <div style="position:relative;">
@@ -813,7 +846,6 @@
         <div class="duel-result" id="duelResult2">—</div>
       </div>
     </div>
-    <!-- Winner banner -->
     <div class="duel-winner-banner" id="duelWinnerBanner">
       <h3 id="duelWinnerText">🏆 Player 1 Wins!</h3>
       <p id="duelWinnerSub">They landed on the priciest option — time to get your wallet out!</p>
@@ -1453,111 +1485,150 @@ if (neverAgainBtn) {
 // ══════════════════════════════════════════════════
 // DUEL MODE
 // ══════════════════════════════════════════════════
-const duelOverlay = document.getElementById('duelOverlay');
-let duelRot1 = 0, duelRot2 = 0;
-let duelSpinning = false;
+document.addEventListener('DOMContentLoaded', function() {
+  const duelOverlay = document.getElementById('duelOverlay');
+  let duelRot1 = 0, duelRot2 = 0;
+  let duelSpinning = false;
 
-function openDuel() {
-  if (!duelOverlay) return;
-  duelOverlay.classList.add('show');
-  drawDuelWheels();
-  const dr1 = document.getElementById('duelResult1'); if(dr1) dr1.textContent = '—';
-  const dr2 = document.getElementById('duelResult2'); if(dr2) dr2.textContent = '—';
-  const dwb = document.getElementById('duelWinnerBanner'); if(dwb) dwb.classList.remove('show');
-}
-function closeDuel() { if(duelOverlay) duelOverlay.classList.remove('show'); }
+  function openDuel() {
+    if (!duelOverlay) return;
+    duelOverlay.classList.add('show');
+    drawDuelWheels();
+    const dr1 = document.getElementById('duelResult1'); if(dr1) dr1.textContent = '—';
+    const dr2 = document.getElementById('duelResult2'); if(dr2) dr2.textContent = '—';
+    const dwb = document.getElementById('duelWinnerBanner'); if(dwb) dwb.classList.remove('show');
+  }
+  function closeDuel() { if(duelOverlay) duelOverlay.classList.remove('show'); }
 
-function drawDuelWheels() {
-  ['duelCanvas1','duelCanvas2'].forEach(id => {
-    const cv = document.getElementById(id);
-    const outer = id === 'duelCanvas1' ? document.getElementById('duelWheel1') : document.getElementById('duelWheel2');
-    if (!cv || !outer) return;
-    const size = outer.offsetWidth || 200;
-    drawWheel(cv, size, -1);
-  });
-}
-
-function duelSpin() {
-  if (duelSpinning || foods.length < 2) return;
-  duelSpinning = true;
-  const _dwb = document.getElementById('duelWinnerBanner'); if(_dwb) _dwb.classList.remove('show');
-  const _dr1 = document.getElementById('duelResult1'); if(_dr1) _dr1.textContent = '⏳';
-  const _dr2 = document.getElementById('duelResult2'); if(_dr2) _dr2.textContent = '⏳';
-  const _dc1 = document.getElementById('duelCenter1'); if(_dc1) _dc1.textContent = '...';
-  const _dc2 = document.getElementById('duelCenter2'); if(_dc2) _dc2.textContent = '...';
-
-  const n = foods.length, dps = 360/n;
-  const idx1 = Math.floor(Math.random()*n), idx2 = Math.floor(Math.random()*n);
-  const food1 = foods[idx1], food2 = foods[idx2];
-
-  function calcDelta(idx, currentRot) {
-    const segMid = idx*dps + dps/2;
-    const target = (360-segMid+360)%360;
-    const cur = ((currentRot%360)+360)%360;
-    let delta = target-cur; if(delta<0) delta+=360; delta+=360*6;
-    return delta;
+  function drawDuelWheels() {
+    ['duelCanvas1','duelCanvas2'].forEach(id => {
+      const cv = document.getElementById(id);
+      const outer = id === 'duelCanvas1' ? document.getElementById('duelWheel1') : document.getElementById('duelWheel2');
+      if (!cv || !outer) return;
+      const size = outer.offsetWidth || 200;
+      drawWheel(cv, size, -1);
+    });
   }
 
-  const delta1 = calcDelta(idx1, duelRot1);
-  const delta2 = calcDelta(idx2, duelRot2);
-  duelRot1 += delta1; duelRot2 += delta2;
+  function duelSpin() {
+    if (duelSpinning || foods.length < 2) return;
+    duelSpinning = true;
+    const _dwb = document.getElementById('duelWinnerBanner'); if(_dwb) _dwb.classList.remove('show');
+    const _dr1 = document.getElementById('duelResult1'); if(_dr1) _dr1.textContent = '⏳';
+    const _dr2 = document.getElementById('duelResult2'); if(_dr2) _dr2.textContent = '⏳';
+    const _dc1 = document.getElementById('duelCenter1'); if(_dc1) _dc1.textContent = '...';
+    const _dc2 = document.getElementById('duelCenter2'); if(_dc2) _dc2.textContent = '...';
 
-  startTicking();
-  const s1 = document.getElementById('duelSpinner1');
-  const s2 = document.getElementById('duelSpinner2');
-  s1.style.transition = `transform 5s cubic-bezier(0.12,0.8,0.18,1)`;
-  s1.style.transform = `rotate(${duelRot1}deg)`;
-  s2.style.transition = `transform 5.4s cubic-bezier(0.12,0.8,0.18,1)`;
-  s2.style.transform = `rotate(${duelRot2}deg)`;
+    const n = foods.length, dps = 360/n;
+    const idx1 = Math.floor(Math.random()*n), idx2 = Math.floor(Math.random()*n);
+    const food1 = foods[idx1], food2 = foods[idx2];
 
-  setTimeout(stopTicking, 3800);
-  setTimeout(() => {
-    const dc1b = document.getElementById('duelCenter1'); if(dc1b) dc1b.textContent = 'SPIN';
-    const dc2b = document.getElementById('duelCenter2'); if(dc2b) dc2b.textContent = 'SPIN';
-    const dr1b = document.getElementById('duelResult1'); if(dr1b) dr1b.textContent = getFoodEmoji(food1) + ' ' + food1;
-    const dr2b = document.getElementById('duelResult2'); if(dr2b) dr2b.textContent = getFoodEmoji(food2) + ' ' + food2;
-
-    const banner = document.getElementById('duelWinnerBanner');
-    const winText = document.getElementById('duelWinnerText');
-    const winSub = document.getElementById('duelWinnerSub');
-    if(banner) banner.classList.add('show');
-
-    if (food1 === food2) {
-      if(winText) winText.textContent = "🤝 It's a Tie!";
-      if(winSub) winSub.textContent = "You both got the same thing — split the bill!";
-    } else if (food1.length >= food2.length) {
-      if(winText) winText.textContent = '🏆 Player 1 Pays!';
-      if(winSub) winSub.textContent = `${food1} sounds fancier than ${food2} — get your wallet out Player 1!`;
-    } else {
-      if(winText) winText.textContent = '🏆 Player 2 Pays!';
-      if(winSub) winSub.textContent = `${food2} sounds fancier than ${food1} — get your wallet out Player 2!`;
+    function calcDelta(idx, currentRot) {
+      const segMid = idx*dps + dps/2;
+      const target = (360-segMid+360)%360;
+      const cur = ((currentRot%360)+360)%360;
+      let delta = target-cur; if(delta<0) delta+=360; delta+=360*6;
+      return delta;
     }
 
-    playWin();
-    duelSpinning = false;
-  }, 5500);
-}
+    const delta1 = calcDelta(idx1, duelRot1);
+    const delta2 = calcDelta(idx2, duelRot2);
+    duelRot1 += delta1; duelRot2 += delta2;
 
-function resetDuel() {
-  duelRot1 = 0; duelRot2 = 0;
-  ['duelSpinner1','duelSpinner2'].forEach(id => {
-    const el = document.getElementById(id);
-    if(el){ el.style.transition='none'; el.style.transform='rotate(0deg)'; }
-  });
-  const _dr1 = document.getElementById('duelResult1'); if(_dr1) _dr1.textContent = '—';
-  const _dr2 = document.getElementById('duelResult2'); if(_dr2) _dr2.textContent = '—';
-  const _dwb = document.getElementById('duelWinnerBanner'); if(_dwb) _dwb.classList.remove('show');
-  drawDuelWheels();
-}
+    startTicking();
+    const s1 = document.getElementById('duelSpinner1');
+    const s2 = document.getElementById('duelSpinner2');
+    if(s1){ s1.style.transition = `transform 5s cubic-bezier(0.12,0.8,0.18,1)`; s1.style.transform = `rotate(${duelRot1}deg)`; }
+    if(s2){ s2.style.transition = `transform 5.4s cubic-bezier(0.12,0.8,0.18,1)`; s2.style.transform = `rotate(${duelRot2}deg)`; }
 
-// Duel events
-const _db = document.getElementById('duelBtn'); if(_db) _db.addEventListener('click', openDuel);
-const _mdb = document.getElementById('mDuelBtn'); if(_mdb) _mdb.addEventListener('click', openDuel);
-const _dc = document.getElementById('duelClose'); if(_dc) _dc.addEventListener('click', closeDuel);
-const _dcb = document.getElementById('duelCloseBtn'); if(_dcb) _dcb.addEventListener('click', closeDuel);
-const _dsb = document.getElementById('duelSpinBoth'); if(_dsb) _dsb.addEventListener('click', duelSpin);
-const _dr = document.getElementById('duelReset'); if(_dr) _dr.addEventListener('click', resetDuel);
-if(duelOverlay) duelOverlay.addEventListener('click', e => { if(e.target===duelOverlay) closeDuel(); });
+    setTimeout(stopTicking, 3800);
+    setTimeout(() => {
+      const dc1b = document.getElementById('duelCenter1'); if(dc1b) dc1b.textContent = 'SPIN';
+      const dc2b = document.getElementById('duelCenter2'); if(dc2b) dc2b.textContent = 'SPIN';
+      const dr1b = document.getElementById('duelResult1'); if(dr1b) dr1b.textContent = getFoodEmoji(food1) + ' ' + food1;
+      const dr2b = document.getElementById('duelResult2'); if(dr2b) dr2b.textContent = getFoodEmoji(food2) + ' ' + food2;
+
+      const banner = document.getElementById('duelWinnerBanner');
+      const winText = document.getElementById('duelWinnerText');
+      const winSub = document.getElementById('duelWinnerSub');
+      if(banner) banner.classList.add('show');
+
+      if (food1 === food2) {
+        if(winText) winText.textContent = "🤝 It's a Tie!";
+        if(winSub) winSub.textContent = "You both got the same thing — split the bill!";
+      } else if (food1.length >= food2.length) {
+        if(winText) winText.textContent = '🏆 Player 1 Pays!';
+        if(winSub) winSub.textContent = `${food1} sounds fancier than ${food2} — get your wallet out Player 1!`;
+      } else {
+        if(winText) winText.textContent = '🏆 Player 2 Pays!';
+        if(winSub) winSub.textContent = `${food2} sounds fancier than ${food1} — get your wallet out Player 2!`;
+      }
+
+      playWin();
+      duelSpinning = false;
+    }, 5500);
+  }
+
+  function resetDuel() {
+    duelRot1 = 0; duelRot2 = 0;
+    ['duelSpinner1','duelSpinner2'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el){ el.style.transition='none'; el.style.transform='rotate(0deg)'; }
+    });
+    const _dr1 = document.getElementById('duelResult1'); if(_dr1) _dr1.textContent = '—';
+    const _dr2 = document.getElementById('duelResult2'); if(_dr2) _dr2.textContent = '—';
+    const _dwb = document.getElementById('duelWinnerBanner'); if(_dwb) _dwb.classList.remove('show');
+    drawDuelWheels();
+  }
+
+  // Duel events
+  const _db = document.getElementById('duelBtn'); if(_db) _db.addEventListener('click', openDuel);
+  const _mdb = document.getElementById('mDuelBtn'); if(_mdb) _mdb.addEventListener('click', openDuel);
+  const _dc = document.getElementById('duelClose'); if(_dc) _dc.addEventListener('click', closeDuel);
+  const _dcb = document.getElementById('duelCloseBtn'); if(_dcb) _dcb.addEventListener('click', closeDuel);
+  const _dsb = document.getElementById('duelSpinBoth'); if(_dsb) _dsb.addEventListener('click', duelSpin);
+  const _dr = document.getElementById('duelReset'); if(_dr) _dr.addEventListener('click', resetDuel);
+  if(duelOverlay) duelOverlay.addEventListener('click', e => { if(e.target===duelOverlay) closeDuel(); });
+
+  // ── Theme picker dropdown toggles ──
+  function setupThemeToggle(toggleId, collapseId, chevronId) {
+    const toggle = document.getElementById(toggleId);
+    const collapse = document.getElementById(collapseId);
+    const chevron = document.getElementById(chevronId);
+    if (!toggle || !collapse) return;
+    toggle.addEventListener('click', () => {
+      const isOpen = collapse.classList.contains('open');
+      collapse.classList.toggle('open', !isOpen);
+      if(chevron) chevron.classList.toggle('open', !isOpen);
+    });
+  }
+  setupThemeToggle('themeCardToggle', 'themePickerCollapse', 'themeChevron');
+  setupThemeToggle('mThemeCardToggle', 'mThemePickerCollapse', 'mThemeChevron');
+
+  // Update the mini active swatch in the header when theme changes
+  function updateActiveSwatches() {
+    const theme = WHEEL_THEMES[currentWheelTheme];
+    if (!theme) return;
+    const c1 = theme.colors[0][0], c2 = theme.colors[2][0], c3 = theme.colors[4][0];
+    const grad = `conic-gradient(${c1} 0deg 120deg, ${c2} 120deg 240deg, ${c3} 240deg 360deg)`;
+    ['themeActiveSwatch','mThemeActiveSwatch'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.style.background = grad;
+    });
+    const label = `${theme.emoji} ${theme.name}`;
+    ['themeCardSub','mThemeCardSub'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.textContent = label;
+    });
+  }
+  // Patch buildThemePicker to also call updateActiveSwatches after selection
+  const _origBuild = buildThemePicker;
+  window.buildThemePicker = function(containerId) {
+    _origBuild(containerId);
+    updateActiveSwatches();
+  };
+  updateActiveSwatches();
+}); // end DOMContentLoaded
 
 // ══════════════════════════════════════════════════
 // PWA SERVICE WORKER REGISTRATION
