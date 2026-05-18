@@ -771,6 +771,61 @@
   </div>
 </div>
 
+<!-- ══ DUEL MODE MODAL ══ -->
+<div class="duel-overlay" id="duelOverlay">
+  <div class="duel-modal">
+    <div class="duel-modal-header">
+      <div class="duel-modal-title">⚔️ Duel Mode</div>
+      <button class="duel-close" id="duelClose">✕</button>
+    </div>
+    <div class="duel-desc">
+      <strong>How it works:</strong> Player 1 and Player 2 each spin their own wheel. 
+      Whoever lands on the <strong>most expensive sounding food</strong> has to pay for dinner tonight! 
+      Both wheels spin from your current food list. May the odds be ever in your favour. 🎲
+    </div>
+    <div class="duel-wheels">
+      <!-- Player 1 -->
+      <div class="duel-player">
+        <div class="duel-player-name">🔴 Player 1</div>
+        <div style="position:relative;">
+          <svg width="24" height="20" viewBox="0 0 40 32" style="display:block;margin:0 auto -2px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8))">
+            <polygon points="20,32 1,3 39,3" fill="#ffffff" stroke="#000" stroke-width="1"/>
+          </svg>
+          <div class="duel-wheel-outer" id="duelWheel1">
+            <div class="duel-spinner" id="duelSpinner1"><canvas class="duel-canvas" id="duelCanvas1"></canvas></div>
+            <div class="duel-center" id="duelCenter1">SPIN</div>
+          </div>
+        </div>
+        <div class="duel-result" id="duelResult1">—</div>
+      </div>
+      <!-- Player 2 -->
+      <div class="duel-player">
+        <div class="duel-player-name">🔵 Player 2</div>
+        <div style="position:relative;">
+          <svg width="24" height="20" viewBox="0 0 40 32" style="display:block;margin:0 auto -2px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8))">
+            <polygon points="20,32 1,3 39,3" fill="#ffffff" stroke="#000" stroke-width="1"/>
+          </svg>
+          <div class="duel-wheel-outer" id="duelWheel2">
+            <div class="duel-spinner" id="duelSpinner2"><canvas class="duel-canvas" id="duelCanvas2"></canvas></div>
+            <div class="duel-center" id="duelCenter2">SPIN</div>
+          </div>
+        </div>
+        <div class="duel-result" id="duelResult2">—</div>
+      </div>
+    </div>
+    <!-- Winner banner -->
+    <div class="duel-winner-banner" id="duelWinnerBanner">
+      <h3 id="duelWinnerText">🏆 Player 1 Wins!</h3>
+      <p id="duelWinnerSub">They landed on the priciest option — time to get your wallet out!</p>
+    </div>
+    <div class="duel-btn-row">
+      <button class="btn btn-duel" id="duelSpinBoth">⚔️ Spin Both!</button>
+      <button class="btn btn-ghost" id="duelReset">Reset</button>
+      <button class="btn btn-ghost" id="duelCloseBtn">Close</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ══════════════════════════════════════════════════
 // THEME
@@ -1527,64 +1582,6 @@ if (getFoodsFromURL()) {
   showSharedBanner();
 }
 </script>
-<!-- ══ DUEL MODE MODAL ══ -->
-<div class="duel-overlay" id="duelOverlay">
-  <div class="duel-modal">
-    <div class="duel-modal-header">
-      <div class="duel-modal-title">⚔️ Duel Mode</div>
-      <button class="duel-close" id="duelClose">✕</button>
-    </div>
-    <div class="duel-desc">
-      <strong>How it works:</strong> Player 1 and Player 2 each spin their own wheel. 
-      Whoever lands on the <strong>most expensive sounding food</strong> has to pay for dinner tonight! 
-      Both wheels spin from your current food list. May the odds be ever in your favour. 🎲
-    </div>
-    <div class="duel-wheels">
-      <!-- Player 1 -->
-      <div class="duel-player">
-        <div class="duel-player-name">🔴 Player 1</div>
-        <div style="position:relative;">
-          <svg width="24" height="20" viewBox="0 0 40 32" style="display:block;margin:0 auto -2px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8))">
-            <polygon points="20,32 1,3 39,3" fill="#ffffff" stroke="#000" stroke-width="1"/>
-          </svg>
-          <div class="duel-wheel-outer" id="duelWheel1">
-            <div class="duel-spinner" id="duelSpinner1"><canvas class="duel-canvas" id="duelCanvas1"></canvas></div>
-            <div class="duel-center" id="duelCenter1">SPIN</div>
-          </div>
-        </div>
-        <div class="duel-result" id="duelResult1">—</div>
-      </div>
-      <!-- Player 2 -->
-      <div class="duel-player">
-        <div class="duel-player-name">🔵 Player 2</div>
-        <div style="position:relative;">
-          <svg width="24" height="20" viewBox="0 0 40 32" style="display:block;margin:0 auto -2px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.8))">
-            <polygon points="20,32 1,3 39,3" fill="#ffffff" stroke="#000" stroke-width="1"/>
-          </svg>
-          <div class="duel-wheel-outer" id="duelWheel2">
-            <div class="duel-spinner" id="duelSpinner2"><canvas class="duel-canvas" id="duelCanvas2"></canvas></div>
-            <div class="duel-center" id="duelCenter2">SPIN</div>
-          </div>
-        </div>
-        <div class="duel-result" id="duelResult2">—</div>
-      </div>
-    </div>
-
-    <!-- Winner banner -->
-    <div class="duel-winner-banner" id="duelWinnerBanner">
-      <h3 id="duelWinnerText">🏆 Player 1 Wins!</h3>
-      <p id="duelWinnerSub">They landed on the priciest option — time to get your wallet out!</p>
-    </div>
-
-    <div class="duel-btn-row">
-      <button class="btn btn-duel" id="duelSpinBoth">⚔️ Spin Both!</button>
-      <button class="btn btn-ghost" id="duelReset">Reset</button>
-      <button class="btn btn-ghost" id="duelCloseBtn">Close</button>
-    </div>
-  </div>
-</div>
-
-
 <!-- ══ SITE FOOTER ══ -->
 <footer class="site-footer">
   <div class="site-footer-inner">
