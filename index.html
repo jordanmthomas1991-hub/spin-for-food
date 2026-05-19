@@ -1849,8 +1849,7 @@ if ('serviceWorker' in navigator && (location.hostname === 'spinforfood.com' || 
 // ══════════════════════════════════════════════════
 // SPIN COUNTER (Cloudflare Worker)
 // ══════════════════════════════════════════════════
-// !! Replace this URL with your Worker URL after deploying !!
-const WORKER_URL = 'https://spin-counter.jordanmthomas.workers.dev';
+const WORKER_URL = 'https://spin-counter.jordanmthomas1991.workers.dev';
 
 function formatSpinCount(n) {
   if (!n || isNaN(n)) return '—';
@@ -1862,6 +1861,8 @@ function formatSpinCount(n) {
 function updateCounterDisplay(n) {
   const el = document.getElementById('spinCounterDisplay');
   if (el) el.textContent = formatSpinCount(n);
+  // Update browser tab title
+  if (n) document.title = `${formatSpinCount(n)} spins and counting 🎡 | SpinForFood`;
 }
 
 // Fetch current count on page load (no increment)
