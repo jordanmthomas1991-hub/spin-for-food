@@ -609,6 +609,34 @@
       max-width: 1280px; margin: 0 auto; padding: 72px 24px 24px;
       border-top: 1px solid var(--border);
     }
+
+    /* ══ SPIN COUNTER ══ */
+    .spin-counter-bar {
+      text-align: center;
+      padding: 14px 24px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .spin-counter-inner {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.85rem; color: var(--text-dim); font-weight: 500;
+    }
+    .spin-counter-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem; letter-spacing: 0.06em;
+      color: var(--orange);
+      min-width: 90px; display: inline-block;
+    }
+    .spin-counter-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--orange);
+      animation: counterPulse 2s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes counterPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
     .seo-features {
       display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
       margin-bottom: 56px;
@@ -690,6 +718,16 @@
 
 <canvas id="confettiCanvas"></canvas>
 <div class="toast" id="toast"></div>
+
+<!-- ══ SPIN COUNTER BAR ══ -->
+<div class="spin-counter-bar">
+  <div class="spin-counter-inner">
+    <span class="spin-counter-dot"></span>
+    <span>🎡</span>
+    <span class="spin-counter-number" id="spinCounterDisplay">...</span>
+    <span>spins and counting</span>
+  </div>
+</div>
 
 <!-- ══ THEME TOGGLE ══ -->
 <button class="theme-toggle" id="themeToggle" title="Toggle light/dark mode">🌙</button>
@@ -1353,6 +1391,7 @@ function bounceStop(spinner,rot){spinner.style.transition='transform 0.22s cubic
 function doSpin(spinnerEl, glowEl, centerEl, renderFn, rotRef, isMobile) {
   if (isSpinning) return;
   isSpinning = true; winnerIndex = -1;
+  incrementSpinCounter();
   setDisabled(true); renderFn(-1);
 
   const n=foods.length, dps=360/n;
@@ -1808,8 +1847,41 @@ if ('serviceWorker' in navigator && (location.hostname === 'spinforfood.com' || 
 
 
 // ══════════════════════════════════════════════════
-// DIETARY FILTERS
+// SPIN COUNTER (Cloudflare Worker)
 // ══════════════════════════════════════════════════
+// !! Replace this URL with your Worker URL after deploying !!
+const WORKER_URL = 'https://spin-counter.jordanmthomas.workers.dev';
+
+function formatSpinCount(n) {
+  if (!n || isNaN(n)) return '—';
+  if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1000) return n.toLocaleString('en-GB');
+  return n.toString();
+}
+
+function updateCounterDisplay(n) {
+  const el = document.getElementById('spinCounterDisplay');
+  if (el) el.textContent = formatSpinCount(n);
+}
+
+// Fetch current count on page load (no increment)
+fetch(`${WORKER_URL}/count`)
+  .then(r => r.json())
+  .then(d => updateCounterDisplay(d.count))
+  .catch(() => {
+    const el = document.getElementById('spinCounterDisplay');
+    if (el) el.textContent = '—';
+  });
+
+// Called on every real spin — increments the server-side counter
+function incrementSpinCounter() {
+  fetch(`${WORKER_URL}/spin`, { method: 'POST' })
+    .then(r => r.json())
+    .then(d => updateCounterDisplay(d.count))
+    .catch(() => {});
+}
+
+
 function setupDietFilters(gridId) {
   const grid = document.getElementById(gridId);
   if (!grid) return;
