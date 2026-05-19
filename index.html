@@ -736,39 +736,45 @@
     <div class="lucky-hint" id="luckyHint"></div>
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-header theme-card-header" id="presetsToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Quick Presets</div><div class="card-sub">1-click wheel setups</div></div>
+        <svg class="theme-chevron open" id="presetsChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="preset-grid" id="presetGrid">
-        <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken,Fish &amp; Chips,Fried Chicken,Tacos,Ramen,BBQ,Greek,Lebanese,Korean">🍔 Takeaway Classics</button>
-        <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi,Quinoa Bowl,Veggie Stir Fry,Avocado Toast,Grilled Salmon,Lentil Soup,Acai Bowl">🥗 Healthy</button>
-        <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles,Pot Noodle,Beans on Toast,Tinned Soup,Pasta Bake,Frozen Pizza,Rice &amp; Eggs">💸 Cheap Eats</button>
-        <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza,Vindaloo,Jerk Chicken,Szechuan Noodles,Nashville Hot,Ghost Pepper Burger,Kimchi Fried Rice">🌶️ Spicy</button>
-        <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas,Lobster,Risotto,Lamb Chops,Duck Confit,Truffle Pasta,Oysters,Beef Wellington">🍷 Date Night</button>
-        <button class="preset-btn" data-foods="Full English,Bagel,Pancakes,Avocado Toast,Croissant,French Toast,Eggs Benedict,Granola Bowl,Smashed Avo,Breakfast Burrito,Waffles,Overnight Oats">🍳 Breakfast</button>
-      </div>
-      <div class="save-preset-row">
-        <input class="save-preset-input" id="savePresetInput" placeholder="Name your preset..."/>
-        <button class="btn btn-green" id="savePresetBtn" style="padding:9px 16px;font-size:0.8rem;">💾 Save</button>
+      <div class="theme-picker-collapse open" id="presetsCollapse">
+        <div class="preset-grid" id="presetGrid">
+          <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken,Fish &amp; Chips,Fried Chicken,Tacos,Ramen,BBQ,Greek,Lebanese,Korean">🍔 Takeaway Classics</button>
+          <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi,Quinoa Bowl,Veggie Stir Fry,Avocado Toast,Grilled Salmon,Lentil Soup,Acai Bowl">🥗 Healthy</button>
+          <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles,Pot Noodle,Beans on Toast,Tinned Soup,Pasta Bake,Frozen Pizza,Rice &amp; Eggs">💸 Cheap Eats</button>
+          <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza,Vindaloo,Jerk Chicken,Szechuan Noodles,Nashville Hot,Ghost Pepper Burger,Kimchi Fried Rice">🌶️ Spicy</button>
+          <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas,Lobster,Risotto,Lamb Chops,Duck Confit,Truffle Pasta,Oysters,Beef Wellington">🍷 Date Night</button>
+          <button class="preset-btn" data-foods="Full English,Bagel,Pancakes,Avocado Toast,Croissant,French Toast,Eggs Benedict,Granola Bowl,Smashed Avo,Breakfast Burrito,Waffles,Overnight Oats">🍳 Breakfast</button>
+        </div>
+        <div class="save-preset-row">
+          <input class="save-preset-input" id="savePresetInput" placeholder="Name your preset..."/>
+          <button class="btn btn-green" id="savePresetBtn" style="padding:9px 16px;font-size:0.8rem;">💾 Save</button>
+        </div>
       </div>
     </div>
 
     <!-- DIETARY FILTERS -->
     <div class="card">
-      <div class="card-header">
+      <div class="card-header theme-card-header" id="dietToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Dietary Filters</div><div class="card-sub">Load a diet-friendly wheel instantly</div></div>
+        <svg class="theme-chevron" id="dietChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="diet-filter-grid" id="dietFilterGrid">
-        <button class="diet-btn" data-diet="vegan" data-foods="Falafel Wrap,Veggie Burger,Tofu Stir Fry,Lentil Soup,Vegan Pizza,Acai Bowl,Veggie Sushi,Chickpea Curry,Mushroom Tacos,Avocado Toast,Poke Bowl,Vegan Ramen">🌱 Vegan</button>
-        <button class="diet-btn" data-diet="vegetarian" data-foods="Margherita Pizza,Veggie Curry,Cheese Burger,Pasta Primavera,Veggie Wrap,Halloumi Salad,Egg Fried Rice,Mushroom Risotto,Caprese Salad,Paneer Tikka,Falafel Bowl,Shakshuka">🥕 Vegetarian</button>
-        <button class="diet-btn" data-diet="gluten-free" data-foods="Grilled Salmon,Chicken & Rice,Steak,Sushi,Poke Bowl,Thai Curry,Cobb Salad,Grilled Chicken,Steak & Veg,Prawn Stir Fry,Corn Tacos,Stuffed Peppers">🌾 Gluten-Free</button>
-        <button class="diet-btn" data-diet="keto" data-foods="Bacon & Eggs,Steak,Grilled Chicken,Cheese Omelette,Salmon,Avocado Salad,Pulled Pork,Lamb Chops,Burger (No Bun),Prawn Skewers,Chicken Wings,Halloumi">🥩 Keto</button>
-        <button class="diet-btn" data-diet="halal" data-foods="Chicken Shawarma,Lamb Kebab,Halal Burger,Biryani,Chicken Tikka,Falafel,Kofta,Lamb Chops,Halal Pizza,Grilled Chicken,Hummus Wrap,Tagine">☪️ Halal</button>
-        <button class="diet-btn" data-diet="pescatarian" data-foods="Grilled Salmon,Fish & Chips,Prawn Stir Fry,Tuna Salad,Fish Tacos,Sushi,Prawn Curry,Crab Cakes,Smoked Salmon,Fishcakes,Calamari,Lobster">🐟 Pescatarian</button>
-        <button class="diet-btn" data-diet="dairy-free" data-foods="Chicken Stir Fry,Vegan Sushi,Grilled Fish,Thai Curry,Chicken Tacos,Rice Bowl,Ramen,Pad Thai,Grilled Steak,Jerk Chicken,Pulled Pork,Avocado Salad">🥛 Dairy-Free</button>
-        <button class="diet-btn" data-diet="low-carb" data-foods="Steak & Salad,Grilled Chicken,Salmon,Prawn Skewers,Cobb Salad,Turkey Wrap,Tuna Bowl,Omelette,Lamb Cutlets,Veggie Stir Fry,Chicken Wings,Cauliflower Rice">📉 Low-Carb</button>
+      <div class="theme-picker-collapse" id="dietCollapse">
+        <div class="diet-filter-grid" id="dietFilterGrid">
+          <button class="diet-btn" data-diet="vegan" data-foods="Falafel Wrap,Veggie Burger,Tofu Stir Fry,Lentil Soup,Vegan Pizza,Acai Bowl,Veggie Sushi,Chickpea Curry,Mushroom Tacos,Avocado Toast,Poke Bowl,Vegan Ramen">🌱 Vegan</button>
+          <button class="diet-btn" data-diet="vegetarian" data-foods="Margherita Pizza,Veggie Curry,Cheese Burger,Pasta Primavera,Veggie Wrap,Halloumi Salad,Egg Fried Rice,Mushroom Risotto,Caprese Salad,Paneer Tikka,Falafel Bowl,Shakshuka">🥕 Vegetarian</button>
+          <button class="diet-btn" data-diet="gluten-free" data-foods="Grilled Salmon,Chicken & Rice,Steak,Sushi,Poke Bowl,Thai Curry,Cobb Salad,Grilled Chicken,Steak & Veg,Prawn Stir Fry,Corn Tacos,Stuffed Peppers">🌾 Gluten-Free</button>
+          <button class="diet-btn" data-diet="keto" data-foods="Bacon & Eggs,Steak,Grilled Chicken,Cheese Omelette,Salmon,Avocado Salad,Pulled Pork,Lamb Chops,Burger (No Bun),Prawn Skewers,Chicken Wings,Halloumi">🥩 Keto</button>
+          <button class="diet-btn" data-diet="halal" data-foods="Chicken Shawarma,Lamb Kebab,Halal Burger,Biryani,Chicken Tikka,Falafel,Kofta,Lamb Chops,Halal Pizza,Grilled Chicken,Hummus Wrap,Tagine">☪️ Halal</button>
+          <button class="diet-btn" data-diet="pescatarian" data-foods="Grilled Salmon,Fish & Chips,Prawn Stir Fry,Tuna Salad,Fish Tacos,Sushi,Prawn Curry,Crab Cakes,Smoked Salmon,Fishcakes,Calamari,Lobster">🐟 Pescatarian</button>
+          <button class="diet-btn" data-diet="dairy-free" data-foods="Chicken Stir Fry,Vegan Sushi,Grilled Fish,Thai Curry,Chicken Tacos,Rice Bowl,Ramen,Pad Thai,Grilled Steak,Jerk Chicken,Pulled Pork,Avocado Salad">🥛 Dairy-Free</button>
+          <button class="diet-btn" data-diet="low-carb" data-foods="Steak & Salad,Grilled Chicken,Salmon,Prawn Skewers,Cobb Salad,Turkey Wrap,Tuna Bowl,Omelette,Lamb Cutlets,Veggie Stir Fry,Chicken Wings,Cauliflower Rice">📉 Low-Carb</button>
+        </div>
+        <div class="diet-info">💡 Tap a filter to instantly load a matching food wheel. Combine with custom presets for the perfect spin.</div>
       </div>
-      <div class="diet-info">💡 Tap a filter to instantly load a matching food wheel. Combine with custom presets for the perfect spin.</div>
     </div>
     <div class="card">
       <div class="card-header theme-card-header" id="themeCardToggle" style="cursor:pointer;user-select:none;">
@@ -784,24 +790,29 @@
     </div>
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-header theme-card-header" id="customWheelToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Custom Wheel</div><div class="card-sub">Add between 2 and 20 foods</div></div>
-        <div class="food-count" id="foodCount">8 / 20</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="food-count" id="foodCount">8 / 20</div>
+          <svg class="theme-chevron" id="customWheelChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
       </div>
-      <div class="food-list-wrap"><div class="food-list" id="foodList"></div></div>
-      <div class="add-row">
-        <input class="food-input" id="foodInput" placeholder="Add a food option..." autocomplete="off"/>
-        <button class="btn btn-orange" id="addFoodBtn" style="padding:11px 20px;">Add</button>
-      </div>
-      <div class="share-bar">
-        <span style="font-size:0.78rem;color:var(--text-dim);white-space:nowrap;">🔗 Share:</span>
-        <input class="share-url" id="shareUrl" readonly/>
-        <button class="share-copy-btn" id="shareCopyBtn">Copy Link</button>
-      </div>
-      <div class="social-share">
-        <button class="social-btn social-wa" id="dWaBtn" ><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</button>
-        <button class="social-btn social-x"  id="dXBtn"  ><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X</button>
-        <button class="social-btn social-fb" id="dFbBtn" ><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</button>
+      <div class="theme-picker-collapse" id="customWheelCollapse">
+        <div class="food-list-wrap"><div class="food-list" id="foodList"></div></div>
+        <div class="add-row">
+          <input class="food-input" id="foodInput" placeholder="Add a food option..." autocomplete="off"/>
+          <button class="btn btn-orange" id="addFoodBtn" style="padding:11px 20px;">Add</button>
+        </div>
+        <div class="share-bar">
+          <span style="font-size:0.78rem;color:var(--text-dim);white-space:nowrap;">🔗 Share:</span>
+          <input class="share-url" id="shareUrl" readonly/>
+          <button class="share-copy-btn" id="shareCopyBtn">Copy Link</button>
+        </div>
+        <div class="social-share">
+          <button class="social-btn social-wa" id="dWaBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</button>
+          <button class="social-btn social-x" id="dXBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X</button>
+          <button class="social-btn social-fb" id="dFbBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</button>
+        </div>
       </div>
     </div>
   </div>
@@ -871,39 +882,45 @@
     </div>
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-header theme-card-header" id="mPresetsToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Quick Presets</div><div class="card-sub">1-click wheel setups</div></div>
+        <svg class="theme-chevron open" id="mPresetsChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="mobile-preset-grid" id="mPresetGrid">
-        <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken,Fish &amp; Chips,Fried Chicken,Tacos,Ramen,BBQ,Greek,Lebanese,Korean">🍔 Takeaway</button>
-        <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi,Quinoa Bowl,Veggie Stir Fry,Avocado Toast,Grilled Salmon,Lentil Soup,Acai Bowl">🥗 Healthy</button>
-        <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles,Pot Noodle,Beans on Toast,Tinned Soup,Pasta Bake,Frozen Pizza,Rice &amp; Eggs">💸 Cheap Eats</button>
-        <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza,Vindaloo,Jerk Chicken,Szechuan Noodles,Nashville Hot,Ghost Pepper Burger,Kimchi Fried Rice">🌶️ Spicy</button>
-        <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas,Lobster,Risotto,Lamb Chops,Duck Confit,Truffle Pasta,Oysters,Beef Wellington">🍷 Date Night</button>
-        <button class="preset-btn" data-foods="Full English,Bagel,Pancakes,Avocado Toast,Croissant,French Toast,Eggs Benedict,Granola Bowl,Smashed Avo,Breakfast Burrito,Waffles,Overnight Oats">🍳 Breakfast</button>
-      </div>
-      <div class="save-preset-row">
-        <input class="save-preset-input" id="mSavePresetInput" placeholder="Name your preset..."/>
-        <button class="btn btn-green" id="mSavePresetBtn" style="padding:9px 14px;font-size:0.78rem;">💾 Save</button>
+      <div class="theme-picker-collapse open" id="mPresetsCollapse">
+        <div class="mobile-preset-grid" id="mPresetGrid">
+          <button class="preset-btn active" data-foods="Pizza,Chinese,Indian,Kebab,Burgers,Thai,Sushi,Chicken,Fish &amp; Chips,Fried Chicken,Tacos,Ramen,BBQ,Greek,Lebanese,Korean">🍔 Takeaway</button>
+          <button class="preset-btn" data-foods="Salad,Grilled Chicken,Poke Bowl,Smoothie,Wrap,Sushi,Quinoa Bowl,Veggie Stir Fry,Avocado Toast,Grilled Salmon,Lentil Soup,Acai Bowl">🥗 Healthy</button>
+          <button class="preset-btn" data-foods="McDonalds,Kebab,Chicken Shop,Pizza Deal,Meal Deal,Noodles,Pot Noodle,Beans on Toast,Tinned Soup,Pasta Bake,Frozen Pizza,Rice &amp; Eggs">💸 Cheap Eats</button>
+          <button class="preset-btn" data-foods="Spicy Wings,Hot Curry,Peri Peri,Spicy Ramen,Hot Pizza,Vindaloo,Jerk Chicken,Szechuan Noodles,Nashville Hot,Ghost Pepper Burger,Kimchi Fried Rice">🌶️ Spicy</button>
+          <button class="preset-btn" data-foods="Steak,Pasta,Sushi,Fancy Burger,Tapas,Lobster,Risotto,Lamb Chops,Duck Confit,Truffle Pasta,Oysters,Beef Wellington">🍷 Date Night</button>
+          <button class="preset-btn" data-foods="Full English,Bagel,Pancakes,Avocado Toast,Croissant,French Toast,Eggs Benedict,Granola Bowl,Smashed Avo,Breakfast Burrito,Waffles,Overnight Oats">🍳 Breakfast</button>
+        </div>
+        <div class="save-preset-row">
+          <input class="save-preset-input" id="mSavePresetInput" placeholder="Name your preset..."/>
+          <button class="btn btn-green" id="mSavePresetBtn" style="padding:9px 14px;font-size:0.78rem;">💾 Save</button>
+        </div>
       </div>
     </div>
 
     <!-- Mobile Dietary Filters -->
     <div class="card">
-      <div class="card-header">
+      <div class="card-header theme-card-header" id="mDietToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Dietary Filters</div><div class="card-sub">Load a diet-friendly wheel</div></div>
+        <svg class="theme-chevron" id="mDietChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </div>
-      <div class="diet-filter-grid" id="mDietFilterGrid">
-        <button class="diet-btn" data-diet="vegan" data-foods="Falafel Wrap,Veggie Burger,Tofu Stir Fry,Lentil Soup,Vegan Pizza,Acai Bowl,Veggie Sushi,Chickpea Curry,Mushroom Tacos,Avocado Toast,Poke Bowl,Vegan Ramen">🌱 Vegan</button>
-        <button class="diet-btn" data-diet="vegetarian" data-foods="Margherita Pizza,Veggie Curry,Cheese Burger,Pasta Primavera,Veggie Wrap,Halloumi Salad,Egg Fried Rice,Mushroom Risotto,Caprese Salad,Paneer Tikka,Falafel Bowl,Shakshuka">🥕 Vegetarian</button>
-        <button class="diet-btn" data-diet="gluten-free" data-foods="Grilled Salmon,Chicken & Rice,Steak,Sushi,Poke Bowl,Thai Curry,Cobb Salad,Grilled Chicken,Steak & Veg,Prawn Stir Fry,Corn Tacos,Stuffed Peppers">🌾 Gluten-Free</button>
-        <button class="diet-btn" data-diet="keto" data-foods="Bacon & Eggs,Steak,Grilled Chicken,Cheese Omelette,Salmon,Avocado Salad,Pulled Pork,Lamb Chops,Burger (No Bun),Prawn Skewers,Chicken Wings,Halloumi">🥩 Keto</button>
-        <button class="diet-btn" data-diet="halal" data-foods="Chicken Shawarma,Lamb Kebab,Halal Burger,Biryani,Chicken Tikka,Falafel,Kofta,Lamb Chops,Halal Pizza,Grilled Chicken,Hummus Wrap,Tagine">☪️ Halal</button>
-        <button class="diet-btn" data-diet="pescatarian" data-foods="Grilled Salmon,Fish & Chips,Prawn Stir Fry,Tuna Salad,Fish Tacos,Sushi,Prawn Curry,Crab Cakes,Smoked Salmon,Fishcakes,Calamari,Lobster">🐟 Pescatarian</button>
-        <button class="diet-btn" data-diet="dairy-free" data-foods="Chicken Stir Fry,Vegan Sushi,Grilled Fish,Thai Curry,Chicken Tacos,Rice Bowl,Ramen,Pad Thai,Grilled Steak,Jerk Chicken,Pulled Pork,Avocado Salad">🥛 Dairy-Free</button>
-        <button class="diet-btn" data-diet="low-carb" data-foods="Steak & Salad,Grilled Chicken,Salmon,Prawn Skewers,Cobb Salad,Turkey Wrap,Tuna Bowl,Omelette,Lamb Cutlets,Veggie Stir Fry,Chicken Wings,Cauliflower Rice">📉 Low-Carb</button>
+      <div class="theme-picker-collapse" id="mDietCollapse">
+        <div class="diet-filter-grid" id="mDietFilterGrid">
+          <button class="diet-btn" data-diet="vegan" data-foods="Falafel Wrap,Veggie Burger,Tofu Stir Fry,Lentil Soup,Vegan Pizza,Acai Bowl,Veggie Sushi,Chickpea Curry,Mushroom Tacos,Avocado Toast,Poke Bowl,Vegan Ramen">🌱 Vegan</button>
+          <button class="diet-btn" data-diet="vegetarian" data-foods="Margherita Pizza,Veggie Curry,Cheese Burger,Pasta Primavera,Veggie Wrap,Halloumi Salad,Egg Fried Rice,Mushroom Risotto,Caprese Salad,Paneer Tikka,Falafel Bowl,Shakshuka">🥕 Vegetarian</button>
+          <button class="diet-btn" data-diet="gluten-free" data-foods="Grilled Salmon,Chicken & Rice,Steak,Sushi,Poke Bowl,Thai Curry,Cobb Salad,Grilled Chicken,Steak & Veg,Prawn Stir Fry,Corn Tacos,Stuffed Peppers">🌾 Gluten-Free</button>
+          <button class="diet-btn" data-diet="keto" data-foods="Bacon & Eggs,Steak,Grilled Chicken,Cheese Omelette,Salmon,Avocado Salad,Pulled Pork,Lamb Chops,Burger (No Bun),Prawn Skewers,Chicken Wings,Halloumi">🥩 Keto</button>
+          <button class="diet-btn" data-diet="halal" data-foods="Chicken Shawarma,Lamb Kebab,Halal Burger,Biryani,Chicken Tikka,Falafel,Kofta,Lamb Chops,Halal Pizza,Grilled Chicken,Hummus Wrap,Tagine">☪️ Halal</button>
+          <button class="diet-btn" data-diet="pescatarian" data-foods="Grilled Salmon,Fish & Chips,Prawn Stir Fry,Tuna Salad,Fish Tacos,Sushi,Prawn Curry,Crab Cakes,Smoked Salmon,Fishcakes,Calamari,Lobster">🐟 Pescatarian</button>
+          <button class="diet-btn" data-diet="dairy-free" data-foods="Chicken Stir Fry,Vegan Sushi,Grilled Fish,Thai Curry,Chicken Tacos,Rice Bowl,Ramen,Pad Thai,Grilled Steak,Jerk Chicken,Pulled Pork,Avocado Salad">🥛 Dairy-Free</button>
+          <button class="diet-btn" data-diet="low-carb" data-foods="Steak & Salad,Grilled Chicken,Salmon,Prawn Skewers,Cobb Salad,Turkey Wrap,Tuna Bowl,Omelette,Lamb Cutlets,Veggie Stir Fry,Chicken Wings,Cauliflower Rice">📉 Low-Carb</button>
+        </div>
+        <div class="diet-info">💡 Tap a filter to instantly load a matching food wheel.</div>
       </div>
-      <div class="diet-info">💡 Tap a filter to instantly load a matching food wheel.</div>
     </div>
     <div class="card">
       <div class="card-header theme-card-header" id="mThemeCardToggle" style="cursor:pointer;user-select:none;">
@@ -919,24 +936,29 @@
     </div>
 
     <div class="card">
-      <div class="card-header">
+      <div class="card-header theme-card-header" id="mCustomWheelToggle" style="cursor:pointer;user-select:none;">
         <div><div class="card-title">Custom Wheel</div><div class="card-sub">2–20 foods</div></div>
-        <div class="food-count" id="mFoodCount">8 / 20</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="food-count" id="mFoodCount">8 / 20</div>
+          <svg class="theme-chevron" id="mCustomWheelChevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </div>
       </div>
-      <div class="food-list-wrap"><div class="mobile-food-list" id="mFoodList"></div></div>
-      <div class="add-row">
-        <input class="food-input" id="mFoodInput" placeholder="Add a food..." autocomplete="off"/>
-        <button class="btn btn-orange" id="mAddFoodBtn" style="padding:11px 16px;">Add</button>
-      </div>
-      <div class="share-bar" style="margin-top:12px;">
-        <span style="font-size:0.78rem;color:var(--text-dim);white-space:nowrap;">🔗</span>
-        <input class="share-url" id="mShareUrl" readonly/>
-        <button class="share-copy-btn" id="mShareCopyBtn">Copy</button>
-      </div>
-      <div class="social-share" style="margin-top:10px;">
-        <button class="social-btn social-wa" id="mWaBtn" style="font-size:0.7rem;padding:7px 9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</button>
-        <button class="social-btn social-x"  id="mXBtn"  style="font-size:0.7rem;padding:7px 9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X</button>
-        <button class="social-btn social-fb" id="mFbBtn" style="font-size:0.7rem;padding:7px 9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</button>
+      <div class="theme-picker-collapse" id="mCustomWheelCollapse">
+        <div class="food-list-wrap"><div class="mobile-food-list" id="mFoodList"></div></div>
+        <div class="add-row">
+          <input class="food-input" id="mFoodInput" placeholder="Add a food..." autocomplete="off"/>
+          <button class="btn btn-orange" id="mAddFoodBtn" style="padding:11px 16px;">Add</button>
+        </div>
+        <div class="share-bar" style="margin-top:12px;">
+          <span style="font-size:0.78rem;color:var(--text-dim);white-space:nowrap;">🔗</span>
+          <input class="share-url" id="mShareUrl" readonly/>
+          <button class="share-copy-btn" id="mShareCopyBtn">Copy</button>
+        </div>
+        <div class="social-share" style="margin-top:10px;">
+          <button class="social-btn social-wa" id="mWaBtn" style="font-size:0.7rem;padding:7px 9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp</button>
+          <button class="social-btn social-x" id="mXBtn" style="font-size:0.7rem;padding:7px 9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> X</button>
+          <button class="social-btn social-fb" id="mFbBtn" style="font-size:0.7rem;padding:7px 9px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Facebook</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1740,6 +1762,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   setupThemeToggle('themeCardToggle', 'themePickerCollapse', 'themeChevron');
   setupThemeToggle('mThemeCardToggle', 'mThemePickerCollapse', 'mThemeChevron');
+  setupThemeToggle('presetsToggle', 'presetsCollapse', 'presetsChevron');
+  setupThemeToggle('mPresetsToggle', 'mPresetsCollapse', 'mPresetsChevron');
+  setupThemeToggle('dietToggle', 'dietCollapse', 'dietChevron');
+  setupThemeToggle('mDietToggle', 'mDietCollapse', 'mDietChevron');
+  setupThemeToggle('customWheelToggle', 'customWheelCollapse', 'customWheelChevron');
+  setupThemeToggle('mCustomWheelToggle', 'mCustomWheelCollapse', 'mCustomWheelChevron');
 
   // Update the mini active swatch in the header when theme changes
   function updateActiveSwatches() {
