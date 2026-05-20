@@ -1,7 +1,7 @@
 // SpinForFood Service Worker
 // Caches the site for offline use
 
-const CACHE_NAME = 'spinforfood-v9';
+const CACHE_NAME = 'spinforfood-v27';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

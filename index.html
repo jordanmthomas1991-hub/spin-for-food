@@ -1172,10 +1172,10 @@ function drawWheel(canvas, size, highlightIdx) {
     const maxChars = n<=6?12:n<=10?9:7;
     const text = food.length>maxChars ? food.slice(0,maxChars-1)+'…' : food;
     const fontSize = n<=5?15:n<=8?13:n<=12?11:9;
-    const labelR = radius*0.63;
+    const labelR = radius*0.78;
     ctx.save();
     ctx.translate(center+Math.cos(aMid)*labelR, center+Math.sin(aMid)*labelR);
-    ctx.rotate(aMid+Math.PI/2);
+    ctx.rotate(aMid+Math.PI);
     ctx.font = `800 ${fontSize}px "DM Sans",sans-serif`;
     const tw=ctx.measureText(text).width, ph=fontSize+8, pw=tw+16, pr=ph/2;
     ctx.beginPath();
